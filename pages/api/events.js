@@ -1,5 +1,11 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+const handler = (req, res) => {
+      console.log(req);
 
-export default (req, res) => {
-      res.status(200).json({})
+      if (req.body.name === "app.install") {
+            process.env.USER_TOKEN = req.body.token;
+      }
+
+      res.status(200).json({});
 }
+
+export default handler;
