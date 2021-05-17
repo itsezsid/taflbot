@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const sendMessage = async(message, sendList) => {
       await axios.post('/api/sendmessage', {

@@ -1,6 +1,4 @@
 const handler = (req, res) => {
-      console.log(req);
-
       if (req.body.name === "app.install") {
             process.env.USER_TOKEN = req.body.token;
       }
