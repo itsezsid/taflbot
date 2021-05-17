@@ -1,22 +1,9 @@
+import axios from 'axios';
 import Head from 'next/head';
-import { useState } from 'react';
-import { instance } from '..';
+import { useState, useEffect } from 'react';
 
-const sendMessage = async(message, sendList) => {
-      for (const contact in sendList) {
-            await instance.post('chat.sendMessage', {
-                  token: process.env.BOT_TOKEN,
-                  to: contact[0],
-                  text: 'Hey there! You have a new message.',
-                  attachments: [{
-                        title: 'Message from Upesh Patel',
-                        description: '',
-                        views: {
-                              flockml: '<flockml>' + message.replace('\r\n', '<br />').replace('{name}', contact[1]) + '</flockml>'
-                        }
-                  }]
-            });
-      }
+const sendMessage = (message, sendList) => {
+      
 }
 
 const Home = ({ contactList }) => {
@@ -64,7 +51,11 @@ const Home = ({ contactList }) => {
                                                                   type="checkbox"
                                                                   name={contact.firstName}
                                                                   value={contact.id}
-                                                                  onChange={() => {}}
+                                                                  onChange={ (e) => {
+                                                                        e.target.checked ? 
+                                                                              updateContacts(prev => [...prev, [e.target.value, e.target.name]]) : 
+                                                                              updateContacts(prev => [...prev].splice([...prev].indexOf([e.target.value, e.target.name])))
+                                                                  }}
                                                             />
                                                             &nbsp;
                                                             <span className="text-sm">
@@ -101,7 +92,7 @@ const Home = ({ contactList }) => {
 }
 
 export const getServerSideProps = async() => {
-      const contactList = await instance.post('roster.listContacts', {
+      const contactList = await axios.post('https://api.flock.co/v1/roster.listContacts', {
             token: process.env.USER_TOKEN
       })
       .then(res => res.data);

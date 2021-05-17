@@ -1,8 +1,10 @@
+import axios from 'axios';
+
 const handler = (req, res) => {
       const { message, sendList } = req.body;
 
       for (const contact in sendList) {
-            await instance.post('chat.sendMessage', {
+            await axios.post('https://api.flock.co/v1/chat.sendMessage', {
                   token: process.env.BOT_TOKEN,
                   to: contact[0],
                   text: 'Hey there! You have a new message.',
