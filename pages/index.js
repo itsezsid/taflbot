@@ -2,8 +2,12 @@ import axios from 'axios';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 
-const sendMessage = (message, sendList) => {
-      
+const sendMessage = async(message, sendList) => {
+      await axios.post('/api/sendmessage', {
+            message: message,
+            sendList: sendList
+      })
+      .catch(err => console.error(err));
 }
 
 const Home = ({ contactList }) => {
