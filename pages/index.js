@@ -1,13 +1,14 @@
 import axios from 'axios';
 import Head from 'next/head';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 const sendMessage = async(message, sendList) => {
       await axios.post('/api/sendmessage', {
             message: message,
             sendList: sendList
       })
-      .then(_res => alert('Messages have been sent!'))
+      .then(_res => toast('Messages have been sent!'))
       .catch(err => console.error(err));
 }
 
@@ -87,6 +88,9 @@ const Home = ({ contactList }) => {
                                     </div>
                               </div>
                         </div>
+                        <ToastContainer 
+                              bodyClassName="text-sm text-black"
+                        />
                   </main>
 
                   <footer className="flex bg-gray-100 justify-center items-center py-5 text-sm text-gray-500">
