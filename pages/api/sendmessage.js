@@ -16,9 +16,10 @@ const handler = async(req, res) => {
                         }
                   }]
             })
-            .then(res => console.log(res))
             .catch(err => console.error(err));
       }
+
+      res.status(200).json({});
 }
 
 export default handler;

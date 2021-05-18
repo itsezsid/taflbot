@@ -7,6 +7,7 @@ const sendMessage = async(message, sendList) => {
             message: message,
             sendList: sendList
       })
+      .then(_res => alert('Messages have been sent!'))
       .catch(err => console.error(err));
 }
 
