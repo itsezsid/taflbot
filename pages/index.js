@@ -1,7 +1,5 @@
 import axios from 'axios';
 import Head from 'next/head';
-import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import React, { useEffect, useState, useCallback } from 'react';
 import Router from 'next/router';
 import { magic } from '../magic';
@@ -28,19 +26,7 @@ const Index = ({ contactList }) => {
                   Router.push('/login');
             });
       }, [Router]);
-=======
-const sendMessage = async(message, sendList) => {
-      await axios.post('/api/sendmessage', {
-            message: message,
-            sendList: sendList
-      })
-      .then(_res => toast('Messages have been sent!'))
-      .catch(err => console.error(err));
-}
 
-const Home = ({ contactList }) => {
-      const [ message, updateMessage ] = useState('');
-      const [ contacts, updateContacts ] = useState([]);
       return userMetadata ? (
             <>
                   <Head>
@@ -122,9 +108,6 @@ const Home = ({ contactList }) => {
                                     </div>
                               </div>
                         </div>
-                        <ToastContainer 
-                              bodyClassName="text-sm text-black"
-                        />
                   </main>
 
                   <footer className="flex bg-gray-100 justify-center items-center py-5 text-sm text-gray-500">
@@ -151,7 +134,7 @@ const sendMessage = async (message, sendList) => {
 
 export const getServerSideProps = async () => {
       const contactList = await axios.post('https://api.flock.co/v1/roster.listContacts', {
-            token: process.env.TOKEN
+            token: process.env.USER_TOKEN
       })
             .then(res => res.data);
 

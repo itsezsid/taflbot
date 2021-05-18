@@ -5,7 +5,7 @@ const handler = async(req, res) => {
 
       for (const [id, name] of sendList) {
             await axios.post('https://api.flock.co/v1/chat.sendMessage', {
-                  token: process.env.TOKEN,
+                  token: process.env.BOT_TOKEN,
                   to: id,
                   text: 'Hey there! You have a new message.',
                   attachments: [{
